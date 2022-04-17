@@ -21,6 +21,7 @@
     "eslint": "^8.13.0",
     "jest": "^27.5.1",
     "metro-react-native-babel-preset": "^0.70.1",
+    "prettier": "2.6.2",
     "react-test-renderer": "17.0.2",
     "typescript": "^4.6.3"
   },
@@ -28,6 +29,6 @@
     "preset": "react-native"
   },
   "resolutions": {
-    "react-devtools-core" : "4.23.0"
+    "react-devtools-core": "4.23.0"
   }
 }

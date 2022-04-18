@@ -1,5 +1,6 @@
 import { ItemT } from '../types/ItemT';
 import { FetchStrategy } from './FetchStrategy';
+import { MovieFetchDataT } from '../types/MovieFetchDataT';
 
 /**
  * Simples IMDB data provider: https://imdb-api.com/
@@ -11,7 +12,7 @@ export class ImdbAPI implements FetchStrategy {
         this.apiKey = apiKey;
     }
 
-    async fetchMovies(searchQuery: string, page: number): Promise<ItemT[]> {
+    async fetchMovies(searchQuery: string, page: number): Promise<MovieFetchDataT> {
         const response = await fetch(`https://imdb-api.com/en/API/SearchMovie/${this.apiKey}/${searchQuery}`);
         const json = await response.json();
         const result = [] as ItemT[];
@@ -25,7 +26,10 @@ export class ImdbAPI implements FetchStrategy {
             });
         }
         return new Promise(resolve => {
-            resolve(result);
+            resolve({
+                resultsCount: result.length,// this would be from paginated API, but here it is only 10 results anytime
+                data: result,
+            });
         });
     }
 }

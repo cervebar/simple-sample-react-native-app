@@ -12,8 +12,8 @@ ios
 !*.less
 !*.md
 !*.mdx
-!*.ts
-!*.tsx
+!*MovieFetchDataT.ts
+!*MovieFetchDataT.tsx
 !*.yml
 
 ## copied from .gitignore

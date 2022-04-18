@@ -1,30 +1,28 @@
 import { View, Text, Button } from 'react-native';
-import React, { FC } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { RouteDetail, NavigationProps } from '../hooks/navigationParams';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState';
-import { setMessage, clearMessage } from '../redux/message';
+import React, { FC, useState } from 'react';
+import { SearchResultMovies } from '../components/SearchResultMovies';
+import { FavoritesList } from '../components/FavoritesList';
 
 export const HomeScreen: FC = () => {
-    const dispatch = useDispatch();
-    const { message } = useSelector((state: RootState) => state.message);
+    const [isFavoritesVisible, setIsFavoritesVisible] = useState<boolean>(true);
+    const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
 
-    const handlePress = () => {
-        dispatch(setMessage('Message from Component' + new Date()));
+    const showFavorites = () => {
+        setIsFavoritesVisible(true);
+        setIsSearchVisible(false);
     };
-    const handlePress2 = () => {
-        dispatch(clearMessage());
+    const showSearch = () => {
+        setIsFavoritesVisible(false);
+        setIsSearchVisible(true);
     };
 
-    const nav = useNavigation<NavigationProps>();
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>{message}</Text>
-            <Button title={'Set Message'} onPress={handlePress} />
-            <Button title={'clear Message'} onPress={handlePress2} />
             <Text>Home Screen</Text>
-            <Button title="Go to Details" onPress={() => nav.navigate(RouteDetail)} />
+            <Button title="Show favourites" onPress={showFavorites} />
+            <Button title="Search" onPress={showSearch} />
+            {isSearchVisible && <SearchResultMovies searchQuery={'dog'} />}
+            {isFavoritesVisible && <FavoritesList />}
         </View>
     );
 };

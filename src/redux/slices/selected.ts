@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Item } from '../types/Item';
+import { ItemT } from '../../types/ItemT';
 
 const selectedSlice = createSlice({
     name: 'selected',
     initialState: {
-        favorites: [] as Item[],
+        favorites: [] as ItemT[],
     },
     reducers: {
-        setSelectedItem(state, action: PayloadAction<Item>) {
+        setSelectedItem(state, action: PayloadAction<ItemT>) {
             state.favorites.push(action.payload);
         },
     },

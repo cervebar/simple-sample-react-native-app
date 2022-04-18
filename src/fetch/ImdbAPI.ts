@@ -1,4 +1,4 @@
-import { Item } from '../types/Item';
+import { ItemT } from '../types/ItemT';
 import { FetchStrategy } from './FetchStrategy';
 
 export class ImdbAPI implements FetchStrategy {
@@ -8,10 +8,10 @@ export class ImdbAPI implements FetchStrategy {
         this.apiKey = apiKey;
     }
 
-    async fetchMovies(searchQuery: string): Promise<Item[]> {
+    async fetchMovies(searchQuery: string): Promise<ItemT[]> {
         const response = await fetch(`https://imdb-api.com/en/API/SearchMovie/${this.apiKey}/${searchQuery}`);
         const json = await response.json();
-        const result = [] as Item[];
+        const result = [] as ItemT[];
         for (const movie of json.results) {
             result.push({
                 id: movie.id,

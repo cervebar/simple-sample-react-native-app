@@ -1,6 +1,13 @@
-import { Item } from '../../types/Item';
+import { ItemT } from '../../types/ItemT';
 import useMyState from './useMyState';
+import { useMemo } from 'react';
 
-export function useFavorites(): Item[] {
-    return useMyState(state => state.favorite);
+export function useFavorites(): ItemT[] {
+    const favoriteData = useMyState(state => state.favorite);
+    const result = useMemo((): ItemT[] => {
+        return Object.keys(favoriteData.data).map(function (k) {
+            return favoriteData.data[k];
+        });
+    }, [favoriteData]);
+    return result;
 }

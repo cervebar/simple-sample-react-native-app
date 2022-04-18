@@ -1,7 +1,7 @@
-import { Item } from '../types/Item';
+import { ItemT } from '../types/ItemT';
 
 export interface FetchStrategy {
-    fetchMovies(searchQuery: string): Promise<Item[]>;
+    fetchMovies(searchQuery: string): Promise<ItemT[]>;
 }
 
 export class FetchStrategyContext {
@@ -13,7 +13,7 @@ export class FetchStrategyContext {
         this.strategy = strategy;
     }
 
-    public fetchMovies(searchQuery: string): Promise<Item[]> {
+    public fetchMovies(searchQuery: string): Promise<ItemT[]> {
         const result = this.strategy.fetchMovies(searchQuery);
         return result;
     }

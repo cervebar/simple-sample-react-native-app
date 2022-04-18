@@ -11,4 +11,6 @@ export type RootStackParamList = {
 };
 
 export type NavigationProps = StackNavigationProp<RootStackParamList>;
+
+// use with hook for routes:  const route = useRoute<RootRouteProps<'RouteDetail'>>();
 export type RootRouteProps<RouteName extends keyof RootStackParamList> = RouteProp<RootStackParamList, RouteName>;

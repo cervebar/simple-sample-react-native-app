@@ -5,6 +5,7 @@ import { RouteDetail, NavigationProps } from '../hooks/navigationParams';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@reduxjs/toolkit/dist/query/core/apiState';
 import { setMessage, clearMessage } from '../redux/message';
+import { Movies } from './Movies';
 
 export const HomeScreen: FC = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export const HomeScreen: FC = () => {
             <Button title={'clear Message'} onPress={handlePress2} />
             <Text>Home Screen</Text>
             <Button title="Go to Details" onPress={() => nav.navigate(RouteDetail)} />
+            <Movies />
         </View>
     );
 };

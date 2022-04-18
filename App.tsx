@@ -13,7 +13,7 @@ import { FETCH_IMDB, FETCH_MOCK, FETCH_REACT_DEV_API } from './src/fetch/fetchCo
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-    const fetchProviderType = FETCH_IMDB;
+    const fetchProviderType = FETCH_REACT_DEV_API;
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>

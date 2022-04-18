@@ -11,7 +11,6 @@ export class ImdbAPI implements FetchStrategy {
     async fetchMovies(searchQuery: string): Promise<Item[]> {
         const response = await fetch(`https://imdb-api.com/en/API/SearchMovie/${this.apiKey}/${searchQuery}`);
         const json = await response.json();
-        console.log('kvak', json);
         const result = [] as Item[];
         for (const movie of json.results) {
             result.push({

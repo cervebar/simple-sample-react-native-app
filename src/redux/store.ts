@@ -1,17 +1,21 @@
 import { combineReducers, configureStore, MiddlewareArray } from '@reduxjs/toolkit';
 import messageReducer from './message';
 import favoriteReducer from './favorites';
+import selectedReducer from './selected';
+
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 const rootReducer = combineReducers({
     message: messageReducer,
     favorite: favoriteReducer,
+    selected: selectedReducer,
 });
 
 const persistConfig = {
     key: 'root',
     storage: AsyncStorage,
+    whitelist: ['favorites', 'message'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

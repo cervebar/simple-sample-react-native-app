@@ -1,7 +1,21 @@
-import { View, Text, Button } from 'react-native';
 import React, { FC, useState } from 'react';
 import { SearchResultMovies } from '../components/SearchResultMovies';
 import { FavoritesList } from '../components/FavoritesList';
+import styled from 'styled-components/native';
+import { Button } from 'react-native-paper';
+
+const HomeScreenContainer = styled.View`
+    display: flex;
+    align-items: center;
+`;
+
+const ShowButtonMenu = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+`;
 
 export const HomeScreen: FC = () => {
     const [isFavoritesVisible, setIsFavoritesVisible] = useState<boolean>(true);
@@ -17,12 +31,17 @@ export const HomeScreen: FC = () => {
     };
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen</Text>
-            <Button title="Show favourites" onPress={showFavorites} />
-            <Button title="Search" onPress={showSearch} />
+        <HomeScreenContainer>
+            <ShowButtonMenu>
+                <Button compact icon="star" mode="contained" onPress={showFavorites}>
+                    favorites
+                </Button>
+                <Button compact icon="movie-search" mode="contained" onPress={showSearch}>
+                    Search
+                </Button>
+            </ShowButtonMenu>
             {isSearchVisible && <SearchResultMovies />}
             {isFavoritesVisible && <FavoritesList />}
-        </View>
+        </HomeScreenContainer>
     );
 };

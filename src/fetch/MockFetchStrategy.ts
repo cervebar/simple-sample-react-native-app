@@ -1,8 +1,8 @@
-import { Item } from '../types/Item';
+import { ItemT } from '../types/ItemT';
 import { FetchStrategy } from './FetchStrategy';
 
 export class MockFetchStrategy implements FetchStrategy {
-    async fetchMovies(searchQuery: string): Promise<Item[]> {
+    async fetchMovies(searchQuery: string): Promise<ItemT[]> {
         console.log('searchQuery: ', searchQuery);
         const result = [
             {

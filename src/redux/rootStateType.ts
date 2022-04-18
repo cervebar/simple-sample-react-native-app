@@ -1,7 +1,9 @@
-import { Item } from '../types/Item';
+import { ItemT } from '../types/ItemT';
+
+export type FavoriteItemMapT = Record<string, ItemT>;
 
 export type RootStateType = {
     message: string;
-    favorite: Item[];
-    selected: Item;
+    favorite: { ids: string[]; data: FavoriteItemMapT };
+    selected: ItemT;
 };

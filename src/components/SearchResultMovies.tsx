@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import { FetchContext } from '../fetch/FetchProvider';
-import { Item } from '../types/Item';
-import { MovieItem } from './MovieItem';
+import { ItemT } from '../types/ItemT';
+import { ListMovieItem } from './ListMovieItem';
 
 export type SearchResultMoviesProps = {
     searchQuery: string;
@@ -10,7 +10,7 @@ export type SearchResultMoviesProps = {
 
 export const SearchResultMovies = ({ searchQuery }: SearchResultMoviesProps) => {
     const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState<Item[]>([]);
+    const [data, setData] = useState<ItemT[]>([]);
     const { strategy } = useContext(FetchContext);
 
     const getMovies = async () => {
@@ -36,7 +36,7 @@ export const SearchResultMovies = ({ searchQuery }: SearchResultMoviesProps) => 
                 <FlatList
                     data={data}
                     keyExtractor={({ id }) => id}
-                    renderItem={({ item }) => <MovieItem data={item} />}
+                    renderItem={({ item }) => <ListMovieItem data={item} />}
                 />
             )}
         </View>

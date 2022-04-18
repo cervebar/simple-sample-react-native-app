@@ -1,14 +1,14 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Item } from '../types/Item';
+import { ItemT } from '../types/ItemT';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps, RouteDetail } from '../hooks/navigationParams';
 
-export type MovieItemProps = {
-    data: Item;
+export type ListMovieItemProps = {
+    data: ItemT;
 };
 
-export const MovieItem = ({ data }: MovieItemProps) => {
+export const ListMovieItem = ({ data }: ListMovieItemProps) => {
     const nav = useNavigation<NavigationProps>();
     const { id, title, description, rating, moviePosterUrl } = data;
 

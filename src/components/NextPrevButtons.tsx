@@ -3,40 +3,46 @@ import { Button } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { RESULTS_PER_PAGE } from '../utils/COnstants';
 import { MyText } from './MyText';
+import { theme } from '../theme/theme';
 
 const NextPrevWrapper = styled.View`
   display: flex;
   flex-direction: row;
   padding-left: 5px;
   padding-right: 5px;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 type NextPrevButtonsProps = {
   nextPage: () => void;
   prevPage: () => void;
-  currentPage: number;
+  page: number;
   resultCount: number;
 };
-export const NextPrevButtons = ({ currentPage, nextPage, prevPage, resultCount }: NextPrevButtonsProps) => {
+export const NextPrevButtons = ({ page, nextPage, prevPage, resultCount }: NextPrevButtonsProps) => {
   if (resultCount < RESULTS_PER_PAGE) {
     return null; // do not show
   }
-  const maxPages = Math.floor(resultCount / RESULTS_PER_PAGE);
-  const isVisiblePrev = currentPage > 0;
-  const isVisibleNext = currentPage * RESULTS_PER_PAGE <= resultCount;
+  const maxPages = Math.ceil(resultCount / RESULTS_PER_PAGE);
+
+  const currentPage = page + 1;// for API it starts at 0
+  const isVisiblePrev = currentPage > 1;
+  const isVisibleNext = currentPage * RESULTS_PER_PAGE < resultCount && maxPages !== currentPage;
   return (
     <>
       <NextPrevWrapper>
-        {isVisiblePrev && < Button icon="chevron-left" mode="contained" onPress={prevPage}>
+        < Button icon="chevron-left" mode="contained" onPress={prevPage}
+                 disabled={!isVisiblePrev}
+        >
           prev
         </Button>
-        }
-        {isVisibleNext && <Button icon="chevron-right" mode="contained" onPress={nextPage}>
+        <Button icon="chevron-right" mode="contained" onPress={nextPage}
+                disabled={!isVisibleNext}>
           next
         </Button>
-        }
       </NextPrevWrapper>
-      <MyText>page {currentPage + 1} from {maxPages + 1}</MyText>
+      <MyText>page {currentPage} from {maxPages}</MyText>
     </>
   );
 };

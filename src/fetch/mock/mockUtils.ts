@@ -1,11 +1,10 @@
 import { ItemT } from '../../types/ItemT';
-import { v4 as uuidv4 } from 'uuid';
 
 export const generateRandomData = (count: number): ItemT[] => {
   const result = [] as ItemT[];
   for (let i = 0; i < count; i++) {
     result.push({
-      id: uuidv4().toLowerCase(),
+      id: (Math.random() + 1).toString(36).substring(7),
       title: `${randomTitle()}  ${i}`,
       description: generateDescription(i),
       rating: randomRating(),

@@ -6,12 +6,16 @@ import { ListMovieItem } from './ListMovieItem';
 import { NextPrevButtons } from './NextPrevButtons';
 import { SearchBar } from './SearchBar';
 import styled from 'styled-components/native';
+import { ConnectionContext } from '../connection/ConnectionProvider';
+import { OfflineInfo } from './OfflineInfo';
+import { ErrorInfoDialog } from './ErrorInfoDialog';
 
 const SearchPageContainer = styled.View`
   padding-left: 5px;
   padding-right: 5px;
   justify-content: center;
   width: 100%;
+ height: 100%;
   align-items: center;
 `;
 
@@ -22,8 +26,15 @@ export const SearchResultMovies = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [page, setPage] = useState<number>(0);
   const { strategy } = useContext(FetchContext);
+  const { connection } = useContext(ConnectionContext);
+  const isOffline = !connection.isOnline;
+  const [visible, setVisible] = React.useState<boolean>(false);
+  const [visibleErrorInfo, setVisibleErrorInfo] = React.useState<boolean>(false);
+  const hideDialog = () => setVisible(false);
+  const hideDialogError = () => setVisibleErrorInfo(false);
 
   const fetchData = (pageToFetch: number) => {
+    setVisible(isOffline);
     setLoading(true);
     strategy
       .fetchMovies(searchQuery, pageToFetch)
@@ -33,7 +44,9 @@ export const SearchResultMovies = () => {
         setLoading(false);
       })
       .catch(err => {
-        console.error(err);
+        console.log('kvak error',err);
+        // NOTE: just simple, here could be better handling, lke what happend, sent to Crashyltics etc.
+        setVisibleErrorInfo(true);
         setLoading(false);
       });
   };
@@ -65,14 +78,16 @@ export const SearchResultMovies = () => {
         <ActivityIndicator />
       ) : (
         <>
+          <NextPrevButtons page={page} nextPage={nextPage} prevPage={prevPage} resultCount={resultsCount} />
           <FlatList
             data={data}
             keyExtractor={({ id }) => id}
             renderItem={({ item }) => <ListMovieItem data={item} />}
           />
-          <NextPrevButtons currentPage={page} nextPage={nextPage} prevPage={prevPage} resultCount={resultsCount} />
         </>
       )}
+      <OfflineInfo visible={visible} hideDialog={hideDialog} />
+      <ErrorInfoDialog visible={visibleErrorInfo} hideDialog={hideDialogError} />
     </SearchPageContainer>
   );
 };

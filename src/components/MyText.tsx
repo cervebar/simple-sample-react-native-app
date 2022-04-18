@@ -15,6 +15,7 @@ const TextStyled = styled.Text<StyleTextProps>`
     justify-content: flex-start;
     font-size: ${({ textType = TextType.DEFAULT }) => textUtils(textType)};
     font-weight: ${({ textType = TextType.DEFAULT }) => fontWeight(textType)};
+    flex-wrap: wrap;
 `;
 
 export const MyText = ({ children, textType = TextType.DEFAULT }: MyTextProps) => {

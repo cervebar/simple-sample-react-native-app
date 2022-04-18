@@ -20,9 +20,11 @@ export const FetchProvider = ({ children, type }: FetchProviderProps) => {
     switch (type) {
         case FETCH_MOCK: {
             strategyContext.setStrategy(new MockFetchStrategy());
+            break;
         }
         case FETCH_REACT_DEV_API: {
             strategyContext.setStrategy(new ReactDevApi());
+            break;
         }
         case FETCH_IMDB: {
             //TODO add API key to secrets

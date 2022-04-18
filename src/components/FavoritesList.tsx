@@ -1,13 +1,14 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import { useFavorites } from '../hooks/selectors/useFavorites';
 import { ListMovieItem } from './ListMovieItem';
+import { MyText } from './MyText';
 
 export const FavoritesList = () => {
     const data = useFavorites();
     return (
         <>
-            <Text>favorite count: {data.length}</Text>
+            <MyText>Total in favorites: {data.length}</MyText>
             <FlatList
                 data={data}
                 keyExtractor={({ id }) => id}

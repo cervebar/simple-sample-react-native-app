@@ -1,70 +1,76 @@
 import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Button, FlatList, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, View } from 'react-native';
 import { FetchContext } from '../fetch/FetchProvider';
 import { ItemT } from '../types/ItemT';
 import { ListMovieItem } from './ListMovieItem';
+import { NextPrevButtons } from './NextPrevButtons';
+import { SearchBar } from './SearchBar';
+import styled from 'styled-components/native';
+
+const SearchPageContainer = styled.View`
+    padding-left: 5px;
+    padding-right: 5px;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+`;
 
 export const SearchResultMovies = () => {
     const [isLoading, setLoading] = useState(false);
     const [data, setData] = useState<ItemT[]>([]);
+    const [resultsCount, setResultsCount] = useState<number>(0);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [page, setPage] = useState<number>(1);
     const { strategy } = useContext(FetchContext);
 
-    const fetchData = async () => {
-        try {
-            const response = await strategy.fetchMovies(searchQuery, page);
-            setData(response);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
+    const fetchData = () => {
+        setLoading(true);
+        strategy
+            .fetchMovies(searchQuery, page)
+            .then(res => {
+                setData(res);
+                setResultsCount(20); // TODO from result
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
     };
 
-    const triggerSearch = async (searchQueryInput: string) => {
+    const triggerSearch = (searchQueryInput: string) => {
         if (searchQueryInput.length < 3) {
             return; // start fetching after first 3 characters
         }
         setPage(1); //reset to start
-        setLoading(true);
         setSearchQuery(searchQueryInput);
-        await fetchData();
+        fetchData();
     };
 
     const nextPage = async () => {
-        // TODO max pages from fetchresult
         setPage(page + 1);
-        await fetchData();
+        fetchData();
     };
     const prevPage = async () => {
         setPage(Math.max(1, page - 1));
-        await fetchData();
+        fetchData();
     };
 
     return (
-        <>
-            <TextInput
-                style={{ height: 40 }}
-                placeholder="start searching your movie"
-                onChangeText={text => {
-                    triggerSearch(text);
-                }}
-            />
-            {/*TODO prevent click when in boucdaries */}
-            <Button title="Next page" onPress={nextPage} />
-            <Button title="Prev page" onPress={prevPage} />
-            <View style={{ flex: 1, padding: 24 }}>
-                {isLoading ? (
-                    <ActivityIndicator />
-                ) : (
+        <SearchPageContainer>
+            <SearchBar triggerSearch={triggerSearch} />
+            {isLoading ? (
+                <ActivityIndicator />
+            ) : (
+                <>
                     <FlatList
                         data={data}
                         keyExtractor={({ id }) => id}
                         renderItem={({ item }) => <ListMovieItem data={item} />}
                     />
-                )}
-            </View>
-        </>
+                    <NextPrevButtons nextPage={nextPage} prevPage={prevPage} resultCount={resultsCount} />
+                </>
+            )}
+        </SearchPageContainer>
     );
 };

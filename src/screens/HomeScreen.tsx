@@ -21,7 +21,7 @@ export const HomeScreen: FC = () => {
             <Text>Home Screen</Text>
             <Button title="Show favourites" onPress={showFavorites} />
             <Button title="Search" onPress={showSearch} />
-            {isSearchVisible && <SearchResultMovies searchQuery={'dog'} />}
+            {isSearchVisible && <SearchResultMovies />}
             {isFavoritesVisible && <FavoritesList />}
         </View>
     );

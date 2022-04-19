@@ -8,5 +8,8 @@
     "curly": ["error", "multi-line"],
     "linebreak-style": "off"
   },
-  "extends": "@react-native-community"
+  "extends": "@react-native-community",
+  "globals": {
+    "NodeJS": true
+  }
 }

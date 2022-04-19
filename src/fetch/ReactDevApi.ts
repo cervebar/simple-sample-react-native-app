@@ -2,10 +2,9 @@ import { ItemT } from '../types/ItemT';
 import { FetchStrategy } from './FetchStrategy';
 
 export class ReactDevApi implements FetchStrategy {
-    async fetchMovies(searchQuery: string): Promise<ItemT[]> {
+    async fetchMovies(searchQuery: string, page: number): Promise<ItemT[]> {
         const response = await fetch('https://reactnative.dev/movies.json');
         const json = await response.json();
-        console.log('kvak', json);
         const result = [] as ItemT[];
         for (const movie of json.movies) {
             result.push({

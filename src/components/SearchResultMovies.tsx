@@ -85,7 +85,7 @@ export const SearchResultMovies = () => {
           />
         </>)
         }
-        <ErrorInfoDialog isOffline={isOffline} visible={visibleErrorInfo || isOffline} hideDialog={hideDialogError}  errorData={errorData}/>
+        <ErrorInfoDialog isOffline={isOffline} visible={visibleErrorInfo} hideDialog={hideDialogError}  errorData={errorData}/>
       </SearchPageContainer>
     </>
   );

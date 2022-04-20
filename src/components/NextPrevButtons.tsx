@@ -1,9 +1,7 @@
 import React from 'react';
 import { Button } from 'react-native-paper';
 import styled from 'styled-components/native';
-import { RESULTS_PER_PAGE } from '../utils/COnstants';
 import { MyText } from './MyText';
-import { theme } from '../theme/theme';
 
 const NextPrevWrapper = styled.View`
   display: flex;
@@ -19,16 +17,17 @@ type NextPrevButtonsProps = {
   prevPage: () => void;
   page: number;
   resultCount: number;
+  resultsPerPage: number;
 };
-export const NextPrevButtons = ({ page, nextPage, prevPage, resultCount }: NextPrevButtonsProps) => {
-  if (resultCount < RESULTS_PER_PAGE) {
+export const NextPrevButtons = ({ page, nextPage, prevPage, resultCount, resultsPerPage }: NextPrevButtonsProps) => {
+  if (resultCount < resultsPerPage) {
     return null; // do not show
   }
-  const maxPages = Math.ceil(resultCount / RESULTS_PER_PAGE);
+  const maxPages = Math.ceil(resultCount / resultsPerPage);
 
   const currentPage = page + 1;// for API it starts at 0
   const isVisiblePrev = currentPage > 1;
-  const isVisibleNext = currentPage * RESULTS_PER_PAGE < resultCount && maxPages !== currentPage;
+  const isVisibleNext = currentPage * resultsPerPage < resultCount && maxPages !== currentPage;
   return (
     <>
       <NextPrevWrapper>

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import { DetailScreenProps } from '../screens/DetailScreen';
+import { DetailScreenProps } from './DetailScreen';
 import { RouteProp } from '@react-navigation/native';
 
 export const RouteHome = 'RouteHome';

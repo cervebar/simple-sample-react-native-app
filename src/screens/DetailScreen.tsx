@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { ItemT } from '../types/ItemT';
-import { RootRouteProps } from '../hooks/navigationParams';
+import { RootRouteProps } from './navigationParams';
 import { useDispatch } from 'react-redux';
 import { addToFavorites, removeFromFavorite } from '../redux/slices/favorites';
 import { useIsFavorite } from '../hooks/selectors/useIsFavorite';

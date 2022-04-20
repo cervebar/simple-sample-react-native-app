@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { NavigationProps, RouteHome } from '../hooks/navigationParams';
+import { NavigationProps, RouteHome } from '../screens/navigationParams';
 import { TouchableOpacity } from 'react-native';
 import React from 'react';
 import AntIcon from 'react-native-vector-icons/AntDesign';

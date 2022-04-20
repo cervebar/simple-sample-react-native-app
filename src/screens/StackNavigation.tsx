@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavigationContainer  } from '@react-navigation/native';
-import {  RouteDetail, RouteHome } from '../hooks/navigationParams';
-import { MAIN_THEME_COLOR } from '../utils/theme/Colors';
+import {  RouteDetail, RouteHome } from './navigationParams';
 import { HomeScreen } from './HomeScreen';
 import { DetailScreen } from './DetailScreen';
 import { HomeButton } from '../components/HomeButton';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { theme } from '../theme/theme';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +15,7 @@ export const StackNavigation = () => {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: MAIN_THEME_COLOR,
+            backgroundColor: theme.colors.header,
           },
           headerTintColor: '#fff',
           headerTitleStyle: {

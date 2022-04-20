@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { ItemT } from '../types/ItemT';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationProps, RouteDetail } from '../hooks/navigationParams';
+import { NavigationProps, RouteDetail } from '../screens/navigationParams';
 import styled from 'styled-components/native';
 import { MyText } from './MyText';
 import { TextType } from '../utils/textUtils';
-import { shortenTextIfNeccessary } from '../utils/shortenTextIfNeccessary';
+import { shortenTextIfNecessary } from '../utils/shortenTextIfNecessary';
 import { RatingStars, StarSize } from './RatingStars';
 
 const ContainerWrapper = styled.View`
@@ -69,8 +69,8 @@ export const ListMovieItem = ({ data }: ListMovieItemProps) => {
                     />
                 </Left>
                 <Right>
-                    <MyText textType={TextType.TITLE}>{shortenTextIfNeccessary(title, 20)}</MyText>
-                    <MyText textType={TextType.SMALL}>{shortenTextIfNeccessary(description, 20)}</MyText>
+                    <MyText textType={TextType.TITLE}>{shortenTextIfNecessary(title, 20)}</MyText>
+                    <MyText textType={TextType.SMALL}>{shortenTextIfNecessary(description, 20)}</MyText>
                 </Right>
                 <FixedBottomRight>
                     <RatingStars rating={rating} starSize={StarSize.SMALL} />

@@ -1,6 +1,7 @@
 import { ItemT } from '../types/ItemT';
 import { FetchStrategy } from './FetchStrategy';
 import { MovieFetchDataT } from '../types/MovieFetchDataT';
+import { generateDescription, randomRating } from './mock/mockUtils';
 
 export class ReactDevApi implements FetchStrategy {
     async fetchMovies(searchQuery: string, page: number): Promise<MovieFetchDataT> {
@@ -11,8 +12,8 @@ export class ReactDevApi implements FetchStrategy {
             result.push({
                 id: movie.id,
                 title: movie.title,
-                description: '',
-                rating: 1,
+                description: generateDescription(),
+                rating: randomRating(),
                 moviePosterUrl:
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR185doH7-F0Lt6vvH35KAvay6ml8HXMBvNRQ&usqp=CAU',
             });
@@ -21,6 +22,7 @@ export class ReactDevApi implements FetchStrategy {
             resolve({
                 resultsCount: result.length,
                 data: result,
+                resultsPerPage: result.length,
             });
         });
     }

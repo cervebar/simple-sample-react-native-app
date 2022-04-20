@@ -1,9 +1,13 @@
 import { ItemT } from '../../types/ItemT';
-import { RESULTS_PER_PAGE } from '../../utils/COnstants';
 import { FetchStrategy } from '../FetchStrategy';
 import { generateRandomData } from './mockUtils';
 import { MovieFetchDataT } from '../../types/MovieFetchDataT';
 
+const RESULTS_PER_PAGE = 5;
+
+/**
+ * simulate API with random generated data and random errors
+ */
 export class MockFetchStrategy implements FetchStrategy {
   private currentQuery = '';
   private currentResult = [] as ItemT[];
@@ -16,12 +20,13 @@ export class MockFetchStrategy implements FetchStrategy {
     const startIndex = page * RESULTS_PER_PAGE;
     return new Promise((resolve, reject) => {
       const rand = Math.floor(Math.random() * 100);
-      if (rand > 80) {// to simulate error with 20% change to occure
-        reject({ message: 'random fetch error' });
+      if (rand > 80) {// to simulate error with 20% change to occur
+        reject({ code: 500, message: 'some error' });
       }
       resolve({
         resultsCount: this.currentResult.length,
         data: this.currentResult.slice(startIndex, startIndex + RESULTS_PER_PAGE),
+        resultsPerPage: RESULTS_PER_PAGE,
       });
     });
   }

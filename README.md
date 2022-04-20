@@ -1,4 +1,17 @@
 # simple-sample-react-native-app
+Very simple app for learning/showcase purpose.
+
+![IMDB](docs/img/simple-sample-home.png)
+## specification
+- movie data from the external APIs ( see [IMDB](src/fetch/ImdbAPI.ts) and  [Mock](src/fetch/mock/MockFetchStrategy.ts) fetch providers)
+- initial screen = favorites list (title, movie poster, description and rating)
+- search for a specific movie/show
+- click on movie -> go to detail screen
+- informed if the internet connection is lost or error in fetching - triggered by search action
+
+![IMDB](docs/img/search.png)
+![IMDB](docs/img/detail.png)
+![IMDB](docs/img/error.png)
 
 ## setup
 

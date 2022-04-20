@@ -3,8 +3,11 @@ import React from 'react';
 import { FetchStrategy, FetchStrategyContext } from './FetchStrategy';
 import { MockFetchStrategy } from './mock/MockFetchStrategy';
 import { ReactDevApi } from './ReactDevApi';
-import { FETCH_IMDB, FETCH_MOCK, FETCH_REACT_DEV_API } from './fetchConstants';
 import { ImdbAPI } from './ImdbAPI';
+
+export const FETCH_MOCK = 'mock';
+export const FETCH_REACT_DEV_API = 'devAPI';
+export const FETCH_IMDB = 'imdb';
 
 const strategyContext = new FetchStrategyContext(new MockFetchStrategy());
 export const FetchContext = createContext<{ strategy: FetchStrategy }>({ strategy: strategyContext });

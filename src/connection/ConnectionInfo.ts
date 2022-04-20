@@ -21,13 +21,9 @@ export class ConnectionInfo {
   }
 
   resolveIsOnline(state: any) {
-    console.log('kvak',state);
     if (this._isOnline !== state.isConnected) {
       this._isOnline = !!state.isConnected && !!state.isInternetReachable;
     }
-    // console.log('state.isConnected', state.isConnected);
-    // console.log('state.isInternetReachable', state.isInternetReachable);
-    console.log('isOnline', this._isOnline);
   }
 
   get isOnline(): Boolean {

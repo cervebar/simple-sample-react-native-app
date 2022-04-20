@@ -6,7 +6,7 @@ export const generateRandomData = (count: number): ItemT[] => {
     result.push({
       id: (Math.random() + 1).toString(36).substring(7),
       title: `${randomTitle()}  ${i}`,
-      description: generateDescription(i),
+      description: generateDescription(),
       rating: randomRating(),
       moviePosterUrl: generateImageUrl(),
     });
@@ -34,18 +34,17 @@ export const randomRating = (): number => {
   return Math.floor(Math.random() * 5) + 1;
 };
 
-export const generateDescription = (index: number): string => {
-  const modulo = index % 3;
-  switch (modulo) {
-    case 0:
-      return 'lorem impsum dolor it saamet';
-    case 1:
-      return 'some very very very long long long description';
-    case 2:
-      return 'lorem impsum dolor it saamet';
-    default:
-      throw new Error('unknown modulo' + modulo);
-  }
+export const generateDescription = (): string => {
+  const rand1 = Math.floor(Math.random() * 6);
+  const descriptions = [
+  'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla non lectus sed nisl molestie malesuada. Aliquam erat volutpat. Et harum quidem rerum facilis est et expedita distinctio. Integer vulputate sem a nibh rutrum consequat. Curabitur bibendum justo non orci. Nam quis nulla. Integer in sapien. Quisque porta. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Aenean placerat. Duis viverra diam non justo. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim.',
+  'short description',
+    'Et harum quidem rerum facilis est et expedita distinctio. Integer vulputate sem a nibh rutrum consequat. Curabitur bibendum justo non orci. Nam quis nulla. Integer in sapien. Quisque porta. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consect',
+    'Aliquam id dolor. Ut tempus purus at lorem. Aliquam erat volutpat. Fusce suscipit libero eget elit. Duis viverra diam non justo.',
+    'ante. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Praesent vitae arcu tempor neque lacinia pretium. Etiam commodo dui eget w',
+    'Nam quis nulla. Integer in sapien. Quisque porta. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed qu',
+  ];
+  return descriptions[rand1];
 };
 
 export const generateImageUrl = (): string => {

@@ -52,6 +52,6 @@
     "preset": "react-native"
   },
   "resolutions": {
-    "react-devtools-core": "4.23.0"
+    "react-devtools-core": "4.24.4"
   }
 }

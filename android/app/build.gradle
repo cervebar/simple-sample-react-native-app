@@ -138,6 +138,8 @@ android {
         applicationId "com.simplesample"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+//         netinfo: see: https://github.com/react-native-netinfo/react-native-netinfo
+        androidXCore = "1.7.0"
         versionCode 1
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()

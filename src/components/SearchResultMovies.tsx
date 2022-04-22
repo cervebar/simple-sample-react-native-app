@@ -5,10 +5,10 @@ import { ListMovieItem } from './ListMovieItem';
 import { NextPrevButtons } from './NextPrevButtons';
 import { SearchBar } from './SearchBar';
 import styled from 'styled-components/native';
-import { ConnectionContext } from '../connection/ConnectionProvider';
 import { ErrorInfoDialog } from './ErrorInfoDialog';
 import { MovieFetchDataT } from '../types/MovieFetchDataT';
 import { SimpleSampleErrorT } from '../types/SimpleSampleErrorT';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const SearchPageContainer = styled.View`
   padding-left: 5px;
@@ -25,8 +25,8 @@ export const SearchResultMovies = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [page, setPage] = useState<number>(0);
   const { strategy } = useContext(FetchContext);
-  const { connection } = useContext(ConnectionContext);
-  const isOffline = !connection.isOnline;
+  const netInfo = useNetInfo();
+  const isOffline = !(netInfo.isConnected && netInfo.isInternetReachable);
   const [visibleErrorInfo, setVisibleErrorInfo] = React.useState<boolean>(false);
   const [errorData, setErrorData] = React.useState<SimpleSampleErrorT>(null);
 

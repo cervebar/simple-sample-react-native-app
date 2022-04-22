@@ -6,20 +6,17 @@ import { FETCH_IMDB, FETCH_MOCK, FETCH_REACT_DEV_API, FetchProvider } from './sr
 import { Provider as PaperProvider } from 'react-native-paper';
 import { theme } from './src/theme/theme';
 import { StackNavigation } from './src/screens/StackNavigation';
-import { ConnectionProvider } from './src/connection/ConnectionProvider';
 
 const App = () => {
   const fetchProviderType = FETCH_IMDB;//TODO add this to config
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ConnectionProvider>
           <FetchProvider type={fetchProviderType}>
             <PaperProvider theme={theme}>
               <StackNavigation />
             </PaperProvider>
           </FetchProvider>
-        </ConnectionProvider>
       </PersistGate>
     </Provider>
   );
